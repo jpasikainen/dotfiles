@@ -1,0 +1,47 @@
+[battery]
+label=⚡
+command=acpi -b | grep -E -o '[0-9][0-9][0-9]?%'
+interval=30
+
+[volume]
+full_text=volume
+command=./volume.sh "$button"
+interval=once
+signal=2
+
+[brightness]
+full_text=brightness
+command=./brightness.sh "$button"
+interval=once
+signal=1
+
+#[volume]
+#label=🔈
+#interval=once
+#signal=2
+#command=amixer get Master | awk '$0~/%/{print $5}' | tr -d '[]'
+
+#[brightness]
+#label=☀️
+#interval=once
+#separator=true
+#signal=1
+#command=echo $(light | awk -F. '{print $1}')%
+
+# Guess the weather hourly
+[weather]
+label=🌡️
+command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo
+interval=3600
+color=#A4C2F4
+
+[date]
+label=📅
+command=date '+%d-%m-%Y'
+interval=once
+
+# Update time every 5 seconds
+[time]
+label=🕒
+command=date +%T
+interval=5
